@@ -51,6 +51,15 @@ $(prefix)/bin:
 install-scripts:
 	install -m 0755 scripts/* $(prefix)/bin
 
+pkg-install: $(PROGRAM) | $(DESTDIR)$(prefix)/bin
+	install -m 0755 multimarkdown $(DESTDIR)$(prefix)/bin
+
+$(DESTDIR)$(prefix)/bin:
+	-mkdir -p $(DESTDIR)$(prefix)/bin  2>/dev/null
+
+pkg-install-scripts:
+	install -m 0755 scripts/* $(DESTDIR)$(prefix)/bin
+
 clean:
 	rm -f $(PROGRAM) $(OBJS) parser.c enumMap.txt speed*.txt; \
 	rm -rf mac_installer/Package_Root/usr/local/bin mac_installer/Support_Root mac_installer/*.pkg; \
